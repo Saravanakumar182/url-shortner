@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: url-short
+    env: java
+    plan: free
+    buildCommand: "./mvnw clean package -DskipTests"
+    startCommand: "java -jar target/url_short-0.0.1-SNAPSHOT.jar"
+    envVars:
+      - key: postgresql://url_shortner_4ky6_user:7F8VyLmWnllWaBxLofKQ7ceN0dvGhVdV@dpg-d2srll15pdvs739qnep0-a.oregon-postgres.render.com/url_shortner_4ky6
+        fromDatabase:
+          name: url_shortner_4ky6
+          property: connectionString
+      - key: url_shortner_4ky6_user
+        fromDatabase:
+          name: url_shortner_4ky6
+          property: user
+      - key: 7F8VyLmWnllWaBxLofKQ7ceN0dvGhVdV
+        fromDatabase:
+          name: url_shortner_4ky6
+          property: password
+
+databases:
+  - name: url_shortner_4ky6
+    plan: free
